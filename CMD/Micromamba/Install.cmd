@@ -26,7 +26,7 @@ if not exist "%MAMBA_ROOT_PREFIX%\condabin\micromamba.bat" call "%MAMBA_ROOT_PRE
 if not exist "%ENV_DIR%" (
     echo Packages to install: %PACKAGES%
     echo.
-    call "%MAMBA_ROOT_PREFIX%\micromamba.exe" create --prefix "%ENV_DIR%" %CHANNELS% %PACKAGES%
+    call "%MAMBA_ROOT_PREFIX%\micromamba.exe" create -y --prefix "%ENV_DIR%" %CHANNELS% %PACKAGES%
 )
 
 @rem activate virtual env

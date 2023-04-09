@@ -44,11 +44,10 @@ if (!(Test-Path $condaExe))
 if (Test-Path $env:MAMBA_ROOT_PREFIX) {rm $env:MAMBA_ROOT_PREFIX -recurse}
 
 $condaHook = $installerEnvDir + '\shell\condabin\conda-hook.ps1'
-# create Conda Powershell hook if missing for some reason   should be there by default
-if (!(Test-Path $condaHook))
-{
-    . $condaExe init --no-user powershell > $null
-}
+# regenerate conda hooks to ensure portability
+. $condaExe init --no-user > $null
+
+# execute hook
 . $condaHook
 
 # activate virtual env

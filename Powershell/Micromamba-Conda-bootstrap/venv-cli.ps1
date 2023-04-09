@@ -4,11 +4,10 @@ $condaExe = $installerEnvDir + '\Scripts\conda.exe'
 if (!(Test-Path $condaExe)) {Write-Error 'Conda not found.';pause;exit}
 
 $condaHook = $installerEnvDir + '\shell\condabin\conda-hook.ps1'
-# create Conda Powershell hook if missing for some reason   should be there by default
-if (!(Test-Path $condaHook))
-{
-    . $condaExe init --no-user powershell > $null
-}
+# regenerate conda hooks to ensure portability
+. $condaExe init --no-user > $null
+
+# execute hook
 . $condaHook
 
 # activate virtual env

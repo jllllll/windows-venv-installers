@@ -22,13 +22,16 @@ set "CHANNELS=-c %CHANNELS: = -c %"
 if not exist "%MAMBA_ROOT_PREFIX%\micromamba.exe" call :DownloadMicromamba
 
 @rem create virtual environment containing Conda and desired version of python
-if not exist "%ENV_DIR%\condabin\conda.bat" call :InstallConda
+if not exist "%ENV_DIR%\Scripts\conda.exe" call :InstallConda
+
+@rem regenerate conda hooks to ensure portability
+call "%ENV_DIR%\Scripts\conda.exe" init --no-user >nul 2>&1
 
 @rem activate virtual env
 call "%ENV_DIR%\condabin\conda.bat" activate "%ENV_DIR%" || goto end
 
 @rem install packages using Conda
-call conda install %CHANNELS% %PACKAGES%
+call conda -y install %CHANNELS% %PACKAGES%
 
 
 @rem task-specific commands go here
@@ -52,7 +55,7 @@ call "%MAMBA_ROOT_PREFIX%\micromamba.exe" create -y --always-copy --prefix "%ENV
 echo. && echo Removing Micromamba && echo.
 del /q /s "%MAMBA_ROOT_PREFIX%" >nul
 rd /q /s "%MAMBA_ROOT_PREFIX%" >nul
-if not exist "%ENV_DIR%\condabin\conda.bat" ( echo. && echo Conda install failed. && goto end )
+if not exist "%ENV_DIR%\Scripts\conda.exe" ( echo. && echo Conda install failed. && goto end )
 exit /b
 
 :end
