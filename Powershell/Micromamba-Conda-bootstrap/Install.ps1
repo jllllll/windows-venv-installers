@@ -56,7 +56,7 @@ else {Write-Error 'Conda environment is empty.';pause;exit}
 
 # check that the Conda environment is properly activated
 $condaInfo = conda info
-if ($condaInfo[2].Split(' : ')[1] -ne $installerEnvDir) {Write-Error 'Conda environment could not be activated.';pause;exit}
+if ($condaInfo[2].Split(' ')[-1] -ne $installerEnvDir) {Write-Error 'Conda environment could not be activated.';pause;exit}
 
 # install packages using Conda
 conda install -y $packageChannels.foreach({$_.Trim(' ')}).foreach({'-c',$_}) $packages

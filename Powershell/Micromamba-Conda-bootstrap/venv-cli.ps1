@@ -16,7 +16,7 @@ else {Write-Error 'Conda environment is empty.';pause;exit}
 
 # check that the Conda environment is properly activated
 $condaInfo = conda info
-if ($condaInfo[2].Split(' : ')[1] -ne $installerEnvDir) {Write-Error 'Conda environment could not be activated.';pause;exit}
+if ($condaInfo[2].Split(' ')[-1] -ne $installerEnvDir) {Write-Error 'Conda environment could not be activated.';pause;exit}
 
 if ($PSEdition -eq 'Desktop') {. powershell}
 else {. pwsh}

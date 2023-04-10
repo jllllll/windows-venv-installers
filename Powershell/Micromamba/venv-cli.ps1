@@ -13,7 +13,7 @@ else {Write-Error 'Conda environment is empty.';pause;exit}
 
 # check that the Micromamba environment is properly activated
 $mambaInfo = . $micromambaExe info
-if ($mambaInfo[10].Split(' : ')[1] -ne $installerEnvDir) {Write-Error 'Micromamba environment could not be activated.';pause;exit}
+if ($mambaInfo[10].Split(' ')[-1] -ne $installerEnvDir) {Write-Error 'Micromamba environment could not be activated.';pause;exit}
 
 if ($PSEdition -eq 'Desktop') {. powershell}
 else {. pwsh}
