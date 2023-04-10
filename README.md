@@ -41,7 +41,7 @@ It depends on your specific needs and preferences. The three variants of the scr
 + Uses Micromamba to create an environment containing Python and Conda.
 + Uses Conda for package management after installation.
 + Due to this, the end setup is contained within a single folder, simplifying the folder structure.
-+ Should be portable.
++ Should be portable. Hook scripts must be regenerated after the environment is moved.
 - Is slower to set up and install packages
 - Is the least tested of the scripts, though it has not failed me yet.
 - Initial setup uses Micromamba, and later uses Conda, resulting in this method being subjected to the weaknesses of both.
