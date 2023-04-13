@@ -37,7 +37,7 @@ $condaExe = $installerEnvDir + '\Scripts\conda.exe'
 # create virtual environment containing Conda and desired version of python
 if (!(Test-Path $condaExe))
 {
-    micromamba create -y --always-copy --prefix $installerEnvDir -c conda-forge conda "python=$pythonVersion"
+    micromamba create --no-shortcuts -y --always-copy --prefix $installerEnvDir -c conda-forge conda "python=$pythonVersion"
 }
 
 # delete Micromamba as it is no longer needed

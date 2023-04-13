@@ -31,7 +31,7 @@ call "%ENV_DIR%\Scripts\conda.exe" init --no-user >nul 2>&1
 call "%ENV_DIR%\condabin\conda.bat" activate "%ENV_DIR%" || goto end
 
 @rem install packages using Conda
-call conda -y install %CHANNELS% %PACKAGES%
+call conda install -y %CHANNELS% %PACKAGES%
 
 
 @rem task-specific commands go here
@@ -51,7 +51,7 @@ exit /b
 
 @rem notice the usage of --always-copy this is necessary for a portable installation of Conda
 :InstallConda
-call "%MAMBA_ROOT_PREFIX%\micromamba.exe" create -y --always-copy --prefix "%ENV_DIR%" -c conda-forge conda "python=%PYTHON_VERSION%"
+call "%MAMBA_ROOT_PREFIX%\micromamba.exe" create -y --no-shortcuts --always-copy --prefix "%ENV_DIR%" -c conda-forge conda "python=%PYTHON_VERSION%"
 echo. && echo Removing Micromamba && echo.
 del /q /s "%MAMBA_ROOT_PREFIX%" >nul
 rd /q /s "%MAMBA_ROOT_PREFIX%" >nul

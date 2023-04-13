@@ -33,7 +33,7 @@ call "%MINICONDA_DIR%\Scripts\activate.bat" || ( echo Miniconda hook not found. 
 if not exist "%ENV_DIR%" (
     echo Packages to install: %PACKAGES%
     echo.
-    call conda create -y -p "%ENV_DIR%" %CHANNELS% %PACKAGES%
+    call conda create --no-shortcuts -y -p "%ENV_DIR%" %CHANNELS% %PACKAGES%
 )
 
 @rem activate virtual env
@@ -48,7 +48,7 @@ goto end
 
 :InstallMiniconda
 echo. && echo Installing Miniconda To "%MINICONDA_DIR%" && echo Please Wait... && echo.
-start "" /W /D "%~dp0" "Miniconda3-latest-Windows-x86_64.exe" /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /NoRegistry=1 /S /D=%MINICONDA_DIR% || ( echo Miniconda installer not found. && goto end )
+start "" /W /D "%~dp0" "Miniconda3-latest-Windows-x86_64.exe" /InstallationType=JustMe /NoShortcuts=1 /AddToPath=0 /RegisterPython=0 /NoRegistry=1 /S /D=%MINICONDA_DIR% || ( echo Miniconda installer not found. && goto end )
 del /q "Miniconda3-latest-Windows-x86_64.exe"
 if not exist "%MINICONDA_DIR%\Scripts\conda.exe" ( echo Miniconda install failed. && goto end )
 exit /b

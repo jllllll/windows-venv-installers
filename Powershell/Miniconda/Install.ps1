@@ -37,7 +37,7 @@ if (!(Test-Path $condaExe))
 
     Write-Progress "Installing Miniconda to: $minicondaDir" "Installing..."
 
-    start -Wait '.\Miniconda3-latest-Windows-x86_64.exe' ("/InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /NoRegistry=1 /S /D=$minicondaDir").split(' ')
+    start -Wait '.\Miniconda3-latest-Windows-x86_64.exe' ("/InstallationType=JustMe /NoShortcuts=1 /AddToPath=0 /RegisterPython=0 /NoRegistry=1 /S /D=$minicondaDir").split(' ')
     
     Write-Progress "Installing Miniconda to: $minicondaDir" -completed
 }
@@ -55,7 +55,7 @@ if (!(Test-Path $condaHook))
 # create virtual environment
 if (!(Test-Path ($installerEnvDir + '\python.exe')))
 {
-    conda create -y -p $installerEnvDir $packageChannels.foreach({$_.Trim(' ')}).foreach({'-c',$_}) $packages
+    conda create --no-shortcuts -y -p $installerEnvDir $packageChannels.foreach({$_.Trim(' ')}).foreach({'-c',$_}) $packages
 }
 
 # activate virtual env

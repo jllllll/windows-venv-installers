@@ -36,7 +36,7 @@ if (!(Test-Path $micromambaExe)) {Write-Error 'Unable to download Micromamba.';p
 # create the virtual env if missing
 if (!(Test-Path ($installerEnvDir + '\python.exe')))
 {
-	micromamba create -y --prefix $installerEnvDir $packageChannels.foreach({$_.Trim(' ')}).foreach({'-c',$_}) $packages
+	micromamba create --no-shortcuts -y --prefix $installerEnvDir $packageChannels.foreach({$_.Trim(' ')}).foreach({'-c',$_}) $packages
 }
 
 # activate virtual env
